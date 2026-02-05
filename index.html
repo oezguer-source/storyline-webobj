@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Password Game</title>
+<style>
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial;
+  margin: 50px;
+}
+input {
+  font-size: 24px;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+}
+#shields {
+  margin-top: 30px;
+}
+.shield {
+  width: 60px;
+  height: 60px;
+  background-color: grey;
+  display: inline-block;
+  margin: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+</style>
+</head>
+<body>
+
+<h2>Passwort eingeben</h2>
+<input type="text" id="passwordInput" placeholder="Schreibe hier..." />
+
+<div id="shields">
+  <div class="shield" id="shield1"></div>
+  <div class="shield" id="shield2"></div>
+  <div class="shield" id="shield3"></div>
+  <div class="shield" id="shield4"></div>
+</div>
+
+<script>
+const input = document.getElementById("passwordInput");
+const shields = [
+  document.getElementById("shield1"),
+  document.getElementById("shield2"),
+  document.getElementById("shield3"),
+  document.getElementById("shield4")
+];
+
+input.addEventListener("input", () => {
+  const password = input.value;
+
+  // 1️⃣ Minimum 8 karakter
+  if(password.length >= 8){
+    shields[0].style.backgroundColor = "red";
+  } else {
+    shields[0].style.backgroundColor = "grey";
+  }
+
+  // 2️⃣ Büyük harf
+  if(/[A-Z]/.test(password)){
+    shields[1].style.backgroundColor = "red";
+  } else {
+    shields[1].style.backgroundColor = "grey";
+  }
+
+  // 3️⃣ Rakam
+  if(/[0-9]/.test(password)){
+    shields[2].style.backgroundColor = "red";
+  } else {
+    shields[2].style.backgroundColor = "grey";
+  }
+
+  // 4️⃣ Özel karakter
+  if(/[!@#$%^&*(),.?":{}|<>]/.test(password)){
+    shields[3].style.backgroundColor = "red";
+  } else {
+    shields[3].style.backgroundColor = "grey";
+  }
+});
+</script>
+
+</body>
+</html>
